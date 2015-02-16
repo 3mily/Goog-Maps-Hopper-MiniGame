@@ -1,50 +1,106 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="application.css">
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBURvVMWqBta6jBKqq5oFZQ_Vm7w2kZd6Q">
     </script>
-    // <script type="text/javascript">
-    //   function initialize() {
-    //     var mapOptions = {
-    //       center: { lat: -34.397, lng: 150.644},
-    //       zoom: 8
-    //     };
-    //     var map = new google.maps.Map(document.getElementById('map-canvas'),
-    //         mapOptions);
-    //   }
-    //   google.maps.event.addDomListener(window, 'load', initialize);
-    // </script>
+    <style>
+
+      body {
+        background-image: url(http://nerdsontherocks.com/wp-content/uploads/2013/02/Super-Mario-World-Map.jpg);
+        background-size: 100%;
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      html, body, #map-canvas { 
+        height: 400px;
+        width: 800px; 
+        margin: 0 auto; 
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
+
+
+
+    <span><img src="header.jpg" height="50%" width="50%"></span>
+    <br>
+
+
+
     <div id="map-canvas"></div>
+    <br>
+    <center><a href="https://github.com/3mily"><img src="http://fc05.deviantart.net/fs70/f/2013/303/b/5/pokeball_colour_changer_thingy_by_pixelbreaker-d6sctu4.gif"></a></center>
+    <hr>
 
 
 
-  <script src="application.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <script>
+
+function initialize() {
+
+  var theirLatlng = new google.maps.LatLng(48.363882,-123.044922);
+  var myLatlng = new google.maps.LatLng(48.5618445,-123.3081608);
+
+  var mapOptions = {
+    center: myLatlng,
+    zoom: 7
+  };
+
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+
+  var theirMarker = new google.maps.Marker({
+      position: theirLatlng,
+      map: map,
+      title: 'Mario!',
+      animation: google.maps.Animation.DROP,
+      icon: 'mario_marker.png',
+      draggable: true
+  });
+
+  var myMarker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Megaman!',
+      animation: google.maps.Animation.DROP,
+      icon: 'mm_marker.png',
+      draggable: true
+  });
+
+  function toggleBounce() {
+
+    if (myMarker.getAnimation() != null) {
+      myMarker.setAnimation(null);
+    } else {
+      myMarker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+  function toggleBounce2() {
+
+    if (theirMarker.getAnimation() != null) {
+      theirMarker.setAnimation(null);
+    } else {
+      theirMarker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+
+  google.maps.event.addListener(myMarker, 'click', toggleBounce);
+  google.maps.event.addListener(theirMarker, 'click', toggleBounce2);
+}
+
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+  </script>
   </body>
 </html>
-
-
-
-<!-- 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="application.css">
-  </head>
-  <body>
-    
-    <div id="map-canvas"></div>
-
-
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-    <script src="application.js"></script>
-  </body>
-</html> -->
